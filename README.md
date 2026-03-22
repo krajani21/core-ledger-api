@@ -1,6 +1,6 @@
 # 💰 Core Ledger API
 
-> A production-grade, double-entry accounting ledger engine built with Ruby on Rails — similar to the financial infrastructure powering Stripe, Shopify, and WealthSimple.
+> A production-grade, double-entry accounting ledger engine built with Ruby on Rails.
 
 [![Ruby](https://img.shields.io/badge/Ruby-3.2+-red?logo=ruby)](https://www.ruby-lang.org/)
 [![Rails](https://img.shields.io/badge/Rails-7.1+-red?logo=rubyonrails)](https://rubyonrails.org/)
