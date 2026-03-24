@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account: one
+  ledger_transaction: one
+  amount: 9.99
+  currency: MyString
+  entry_type: MyString
+
+two:
+  account: two
+  ledger_transaction: two
+  amount: 9.99
+  currency: MyString
+  entry_type: MyString
