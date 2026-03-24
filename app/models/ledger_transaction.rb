@@ -1,0 +1,2 @@
+class LedgerTransaction < ApplicationRecord
+end
