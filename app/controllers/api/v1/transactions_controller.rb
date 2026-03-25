@@ -5,9 +5,17 @@ module Api
     class TransactionsController < BaseController
       # POST /api/v1/transactions
       def create
-        # TransactionService will be wired in during Phase 5.
-        # For now, accept the params and return a placeholder.
-        render json: { message: "Transaction creation not yet implemented" }, status: :not_implemented
+        result = TransactionService.create(
+          idempotency_key: transaction_params[:idempotency_key],
+          reference:       transaction_params[:reference],
+          entries:         entry_params
+        )
+
+        if result.success?
+          render json: transaction_json(result.transaction), status: :created
+        else
+          render_error(result.errors, status: :unprocessable_entity)
+        end
       end
 
       # GET /api/v1/transactions/:id
@@ -19,6 +27,16 @@ module Api
       end
 
       private
+
+      def transaction_params
+        params.permit(:idempotency_key, :reference, entries: %i[account_id entry_type amount currency])
+      end
+
+      def entry_params
+        (transaction_params[:entries] || []).map do |ep|
+          ep.to_h.symbolize_keys
+        end
+      end
 
       def transaction_json(txn)
         {
