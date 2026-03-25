@@ -1,15 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/entries.yml
 
-one:
-  account: one
-  ledger_transaction: one
-  amount: 9.99
-  currency: MyString
-  entry_type: MyString
+debit_entry:
+  account: merchant
+  ledger_transaction: posted_txn
+  amount: 100.00
+  currency: USD
+  entry_type: debit
 
-two:
-  account: two
-  ledger_transaction: two
-  amount: 9.99
-  currency: MyString
-  entry_type: MyString
+credit_entry:
+  account: wallet
+  ledger_transaction: posted_txn
+  amount: 100.00
+  currency: USD
+  entry_type: credit

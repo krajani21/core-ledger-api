@@ -1,11 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/ledger_transactions.yml
 
-one:
-  idempotency_key: MyString
-  reference: MyString
-  status: MyString
+posted_txn:
+  idempotency_key: fixture_posted_001
+  reference: Fixture posted transaction
+  status: posted
 
-two:
-  idempotency_key: MyString
-  reference: MyString
-  status: MyString
+pending_txn:
+  idempotency_key: fixture_pending_001
+  reference: Fixture pending transaction
+  status: pending

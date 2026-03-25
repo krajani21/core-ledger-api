@@ -1,11 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/accounts.yml
 
-one:
-  name: MyString
-  currency: MyString
-  balance: 9.99
+merchant:
+  name: merchant_revenue
+  currency: USD
+  balance: 1000.00
 
-two:
-  name: MyString
-  currency: MyString
-  balance: 9.99
+wallet:
+  name: user_wallet
+  currency: CAD
+  balance: 500.00

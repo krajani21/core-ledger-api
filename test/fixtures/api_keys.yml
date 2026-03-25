@@ -1,0 +1,11 @@
+# test/fixtures/api_keys.yml
+
+dev_key:
+  name: development
+  token: test_token_for_fixtures
+  active: true
+
+inactive_key:
+  name: revoked
+  token: inactive_token_fixture
+  active: false
