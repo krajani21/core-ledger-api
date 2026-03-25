@@ -5,6 +5,13 @@ module Api
     class TransactionsController < BaseController
       # POST /api/v1/transactions
       def create
+        # ── Idempotency check ──────────────────────────────────
+        existing = LedgerTransaction.find_by(idempotency_key: transaction_params[:idempotency_key])
+        if existing
+          return render json: transaction_json(existing), status: :ok
+        end
+
+        # ── Create new transaction ─────────────────────────────
         result = TransactionService.create(
           idempotency_key: transaction_params[:idempotency_key],
           reference:       transaction_params[:reference],
