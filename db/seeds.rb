@@ -1,9 +1,20 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# frozen_string_literal: true
+
+# Seed demo accounts for development and testing.
+# Idempotent — safe to run multiple times via: bin/rails db:seed
+
+puts "Seeding accounts..."
+
+[
+  { name: "merchant_revenue",  currency: "USD", balance: 0 },
+  { name: "user_wallet",       currency: "CAD", balance: 0 },
+  { name: "platform_fees",     currency: "USD", balance: 0 },
+  { name: "exchange_holdings", currency: "USD", balance: 0 }
+].each do |attrs|
+  Account.find_or_create_by!(name: attrs[:name]) do |account|
+    account.currency = attrs[:currency]
+    account.balance  = attrs[:balance]
+  end
+end
+
+puts "Seeded #{Account.count} accounts."
