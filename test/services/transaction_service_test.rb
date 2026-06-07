@@ -38,8 +38,8 @@ class TransactionServiceTest < ActiveSupport::TestCase
   end
 
   test "updates account balances correctly" do
-    merchant_before = @merchant.balance
-    wallet_before   = @wallet.balance
+    merchant_before = @merchant.computed_balance
+    wallet_before   = @wallet.computed_balance
 
     TransactionService.create(
       idempotency_key: "service_test_003",
@@ -50,15 +50,12 @@ class TransactionServiceTest < ActiveSupport::TestCase
       ]
     )
 
-    @merchant.reload
-    @wallet.reload
-
-    assert_equal merchant_before - 25, @merchant.balance
-    assert_equal wallet_before + 25,   @wallet.balance
+    assert_equal merchant_before - 25, @merchant.computed_balance
+    assert_equal wallet_before + 25,   @wallet.computed_balance
   end
 
   test "transaction is atomic — rolls back on failure" do
-    merchant_before = @merchant.balance
+    merchant_before = @merchant.computed_balance
 
     # Force a failure by using a non-existent account ID
     result = TransactionService.create(
@@ -71,8 +68,7 @@ class TransactionServiceTest < ActiveSupport::TestCase
     )
 
     assert_not result.success?
-    @merchant.reload
-    assert_equal merchant_before, @merchant.balance
+    assert_equal merchant_before, @merchant.computed_balance
   end
 
   test "multi-currency transaction balances through USD conversion" do

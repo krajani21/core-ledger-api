@@ -3,9 +3,9 @@
 merchant:
   name: merchant_revenue
   currency: USD
-  balance: 1000.00
+  opening_balance: 1000.00
 
 wallet:
   name: user_wallet
   currency: CAD
-  balance: 500.00
+  opening_balance: 500.00

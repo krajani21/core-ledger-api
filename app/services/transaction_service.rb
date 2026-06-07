@@ -67,7 +67,6 @@ class TransactionService
     ActiveRecord::Base.transaction do
       txn = create_ledger_transaction
       create_entries(txn)
-      update_account_balances
       txn.posted!                     # flip status → "posted"
 
       Result.new(transaction: txn.reload, errors: [])
@@ -95,18 +94,4 @@ class TransactionService
     end
   end
 
-  # Debits decrease account balance, credits increase it.
-  def update_account_balances
-    @entry_params.each do |ep|
-      account = Account.lock.find(ep[:account_id])
-      delta   = BigDecimal(ep[:amount].to_s)
-
-      case ep[:entry_type]
-      when "debit"  then account.balance -= delta
-      when "credit" then account.balance += delta
-      end
-
-      account.save!
-    end
-  end
 end

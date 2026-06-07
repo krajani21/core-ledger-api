@@ -6,14 +6,14 @@
 puts "Seeding accounts..."
 
 [
-  { name: "merchant_revenue",  currency: "USD", balance: 0 },
-  { name: "user_wallet",       currency: "CAD", balance: 0 },
-  { name: "platform_fees",     currency: "USD", balance: 0 },
-  { name: "exchange_holdings", currency: "USD", balance: 0 }
+  { name: "merchant_revenue",  currency: "USD", opening_balance: 0 },
+  { name: "user_wallet",       currency: "CAD", opening_balance: 0 },
+  { name: "platform_fees",     currency: "USD", opening_balance: 0 },
+  { name: "exchange_holdings", currency: "USD", opening_balance: 0 }
 ].each do |attrs|
   Account.find_or_create_by!(name: attrs[:name]) do |account|
-    account.currency = attrs[:currency]
-    account.balance  = attrs[:balance]
+    account.currency        = attrs[:currency]
+    account.opening_balance = attrs[:opening_balance]
   end
 end
 
